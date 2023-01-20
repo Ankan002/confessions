@@ -1,14 +1,17 @@
-import './globals.css'
+import { RecoilContextProvider } from "@/components/elements";
+import "./globals.css";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <head />
-      <body>{children}</body>
+      <body>
+        <RecoilContextProvider>{children}</RecoilContextProvider>
+      </body>
     </html>
-  )
+  );
 }
