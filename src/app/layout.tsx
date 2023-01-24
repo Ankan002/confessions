@@ -1,4 +1,8 @@
-import { RecoilContextProvider, ThemeProvider } from "@/components/elements";
+import {
+  GoogleAuthProvider,
+  RecoilContextProvider,
+  ThemeProvider,
+} from "@/components/elements";
 import "./globals.css";
 
 export default function RootLayout({
@@ -11,7 +15,9 @@ export default function RootLayout({
       <head />
       <body>
         <RecoilContextProvider>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            <GoogleAuthProvider>{children}</GoogleAuthProvider>
+          </ThemeProvider>
         </RecoilContextProvider>
       </body>
     </html>
