@@ -1,5 +1,6 @@
 import {
   GoogleAuthProvider,
+  OneTapProvider,
   RecoilContextProvider,
   ThemeProvider,
 } from "@/components/elements";
@@ -16,7 +17,9 @@ export default function RootLayout({
       <body>
         <RecoilContextProvider>
           <ThemeProvider>
-            <GoogleAuthProvider>{children}</GoogleAuthProvider>
+            <GoogleAuthProvider>
+              <OneTapProvider>{children}</OneTapProvider>
+            </GoogleAuthProvider>
           </ThemeProvider>
         </RecoilContextProvider>
       </body>
