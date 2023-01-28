@@ -4,6 +4,7 @@ import {
   RecoilContextProvider,
   ThemeProvider,
 } from "@/components/elements";
+import { ThemeToggler } from "@/components/theme-toggler";
 import "./globals.css";
 
 export default function RootLayout({
@@ -18,7 +19,10 @@ export default function RootLayout({
         <RecoilContextProvider>
           <ThemeProvider>
             <GoogleAuthProvider>
-              <OneTapProvider>{children}</OneTapProvider>
+              <OneTapProvider>
+                {children}
+                <ThemeToggler />
+              </OneTapProvider>
             </GoogleAuthProvider>
           </ThemeProvider>
         </RecoilContextProvider>

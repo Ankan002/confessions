@@ -29,7 +29,7 @@ const ThemeProvider = (props: Props) => {
       return;
     }
 
-    setCurrentTheme(currentTheme);
+    setCurrentTheme(savedTheme);
   }, []);
 
   return <div className={currentTheme}>{children}</div>;
