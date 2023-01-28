@@ -28,6 +28,11 @@ module.exports = {
         "primary-violet": "#5E0BD6",
         "primary-pink": "#FF10E3",
         "vermillion": "#FF5968",
+      },
+      fontFamily: {
+        "manrope": "'Manrope', sans-serif",
+        "fira-code": "'Fira Code', monospace",
+        "quicksand": "'Quicksand', sans-serif"
       }
     },
   },
