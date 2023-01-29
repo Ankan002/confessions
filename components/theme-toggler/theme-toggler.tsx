@@ -9,7 +9,6 @@ const ThemeToggler = () => {
     const [currentTheme, setCurrentTheme] = useRecoilState<Theme>(themeAtom);
 
     const onToggleClick = () => {
-        console.log("clicked!!")
         if(currentTheme === "light") {
             localStorage.setItem("theme", "dark");
             setCurrentTheme("dark");
