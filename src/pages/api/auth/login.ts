@@ -22,13 +22,6 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
         });
     }
 
-    if(req.cookies["auth-token"]) {
-        return res.status(400).json({
-            success: false,
-            error: "You are already authenticated"
-        });
-    }
-
     try {
         RequestBodySchema.parse(req.body);
 
