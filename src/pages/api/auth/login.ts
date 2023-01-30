@@ -12,8 +12,6 @@ const RequestBodySchema = z.object({
     profile_pic: z.string(),
 });
 
-type RequestBody = z.infer<typeof RequestBodySchema>;
-
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method !== "POST") {
         return res.status(400).json({
@@ -23,9 +21,18 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     try {
-        RequestBodySchema.parse(req.body);
-
-        const requestPayload = req.body as RequestBody;
+        const requestBodySchemaValidationResult = RequestBodySchema.safeParse(
+            req.body
+          );
+      
+          if (!requestBodySchemaValidationResult.success) {
+            return res.status(400).json({
+              success: false,
+              error: requestBodySchemaValidationResult.error.errors[0].message,
+            });
+          }
+      
+          const requestPayload = requestBodySchemaValidationResult.data;
         const prismaClient = getPrismaClient();
 
         const user = await prismaClient.user.findUnique({
@@ -46,7 +53,9 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
             setCookie("auth-token", authToken, {
                 httpOnly: true,
                 expires: addDays(new Date(), Number(process.env["COOKIE_EXPIRATION_TIME"]) ?? 0),
-                secure: process.env["NODE_ENV"] === "production" ? true : false
+                secure: process.env["NODE_ENV"] === "production" ? true : false,
+                req,
+                res
             });
 
             return res.status(200).json({
@@ -74,7 +83,9 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
         setCookie("auth-token", authToken, {
             httpOnly: true,
             expires: addDays(new Date(), Number(process.env["COOKIE_EXPIRATION_TIME"]) ?? 0),
-            secure: process.env["NODE_ENV"] === "production" ? true : false
+            secure: process.env["NODE_ENV"] === "production" ? true : false,
+            req,
+            res
         });
 
         res.status(200).json({
