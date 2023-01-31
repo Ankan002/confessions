@@ -1,8 +1,15 @@
 import loginImage from "assets/images/login-image.png";
 import Image from "next/image";
 import { LoginButton } from "@/components/login-button";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const Login = () => {
+  const nextCookies = cookies();
+  const authCookie = nextCookies.has("auth-token");
+
+  if(authCookie) redirect("/");
+
   return (
     <main className="min-h-screen flex flex-col bg-primary-light dark:bg-secondary-dark justify-center items-center px-6 py-2">
       <Image
