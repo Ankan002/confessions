@@ -2,26 +2,26 @@
 
 import { useGoogleLogin } from "@react-oauth/google";
 import { SiGoogle } from "react-icons/si";
+import { login } from "helpers";
+import { useSetRecoilState } from "recoil";
+import { authAtom } from "atoms";
+import { useRouter } from "next/navigation";
 
 const LoginButton = () => {
+  const setIsAuthenticated = useSetRecoilState<boolean>(authAtom);
+  const router = useRouter();
+
   const onLoginClick = useGoogleLogin({
     onSuccess: async (token) => {
-      try{
-        const userInfoResponse = await fetch(`${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_USERINFO_URI}`, {
-          method: "GET",
-          headers: {
-            "content-type": "application/json",
-            "authorization": `Bearer ${token.access_token}`
-          }
-        });
+      const loginResponse = await login(token.access_token);
 
-        const userInfo = await userInfoResponse.json();
+      if(!loginResponse.success) {
+        console.log(loginResponse.error);
+        return;
+      }
 
-        console.log(userInfo);
-      }
-      catch(error){
-        console.log(error);
-      }
+      setIsAuthenticated(true);
+      router.push("/");
     },
     onError: (e) => {
       console.log(e);
