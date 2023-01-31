@@ -27,15 +27,29 @@ model User {
 }
 
 model Confession {
-  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  confession  String
-  username    String
-  avatar      String
-  user        User     @relation(fields: [userId], references: [id])
-  userId      String   @db.Uuid
-  deactivated Boolean  @default(false)
-  tags        String[]
-  PostReport  Report[]
+  id            String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  confession    String
+  username      String
+  avatar        String
+  user          User            @relation(fields: [userId], references: [id])
+  userId        String          @db.Uuid
+  deactivated   Boolean         @default(false)
+  PostReport    Report[]
+  ConfessionTag ConfessionTag[]
+}
+
+model Tag {
+  id            String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String
+  ConfessionTag ConfessionTag[]
+}
+
+model ConfessionTag {
+  id           String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tag          Tag        @relation(fields: [tagId], references: [id])
+  tagId        String     @db.Uuid
+  confession   Confession @relation(fields: [confessionId], references: [id])
+  confessionId String     @db.Uuid
 }
 
 model Report {
