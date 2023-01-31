@@ -16,5 +16,18 @@ export default function middleware(request: NextRequest){
         return NextResponse.next();
     }
 
+    if(request.nextUrl.pathname === "/api/auth/logout") {
+        const authToken = request.cookies.get("auth-token");
+
+        if(!authToken){
+            return NextResponse.json({
+                success: false,
+                error: "Access Denied"
+            }, {
+                status: 401
+            });
+        }
+    }
+
     return NextResponse.next();
 }
