@@ -4,6 +4,7 @@ import {
   RecoilContextProvider,
   ThemeProvider,
   AuthStateChecker,
+  CustomToaster,
 } from "@/components/elements";
 import { ThemeToggler } from "@/components/theme-toggler";
 import { cookies } from "next/headers";
@@ -28,6 +29,7 @@ export default function RootLayout({
                 <OneTapProvider>
                   {children}
                   <ThemeToggler />
+                  <CustomToaster />
                 </OneTapProvider>
               </GoogleAuthProvider>
             </ThemeProvider>
