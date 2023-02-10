@@ -20,7 +20,7 @@ const ThemeToggler = () => {
     }
 
     return (
-        <button className="border-2 border-primary-dark dark:border-primary-light bg-gradient-to-r from-primary-light-yellow to-primary-dark-yellow dark:from-primary-pink dark:to-primary-violet rounded-md fixed right-5 bottom-5 p-2 flex items-start justify-center shadow-[0_1px_12px_2px_rgba(246,186,61,0.7)] dark:shadow-[0_1px_12px_2px_rgba(255,16,227,0.7)]" onClick={onToggleClick} aria-label="toggle-theme">
+        <button className="border-2 border-primary-dark dark:border-primary-light bg-primary-dark-yellow  dark:bg-primary-pink rounded-md fixed right-5 bottom-5 p-2 flex items-start justify-center shadow-[0_1px_12px_2px_rgba(246,186,61,0.7)] dark:shadow-[0_1px_12px_2px_rgba(255,16,227,0.7)]" onClick={onToggleClick} aria-label="toggle-theme">
             {
                 currentTheme === "light" ? (
                     <TbMoonStars className="text-secondary-dark text-xl" />
