@@ -11,15 +11,13 @@ const getUser = async (req: NextApiRequest, res: NextApiResponse) => {
     })?.toString() as string;
 
     try {
-        const { id } = jwt.verify(authCookie, process.env.JWT_SECRET ?? "") as JwtPayloadUser;
-
-        console.log(id)
+        const { user } = jwt.verify(authCookie, process.env.JWT_SECRET ?? "") as JwtPayloadUser;
 
         const prismaClient = getPrismaClient();
 
         const userData = await prismaClient.user.findUnique({
             where: {
-                id
+                id: user.id
             }
         });
 

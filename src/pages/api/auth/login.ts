@@ -46,7 +46,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
         });
 
         if(user){
-            const authToken = jwt.sign(user, process.env["JWT_SECRET"] ?? "", {
+            const authToken = jwt.sign({user}, process.env["JWT_SECRET"] ?? "", {
                 expiresIn: process.env["JWT_EXPIRATION_TIME"] ?? ""
             });
 
@@ -76,7 +76,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
             }
         });
 
-        const authToken = jwt.sign(newUser, process.env["JWT_SECRET"] ?? "", {
+        const authToken = jwt.sign({user: newUser}, process.env["JWT_SECRET"] ?? "", {
             expiresIn: process.env["JWT_EXPIRATION_TIME"] ?? ""
         });
 
