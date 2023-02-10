@@ -16,7 +16,7 @@ export default function middleware(request: NextRequest){
         return NextResponse.next();
     }
 
-    if(request.nextUrl.pathname === "/api/auth/logout") {
+    if(request.nextUrl.pathname === "/api/auth/logout" || request.nextUrl.pathname.startsWith("/api/user")) {
         const authToken = request.cookies.get("auth-token");
 
         if(!authToken){
