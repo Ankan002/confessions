@@ -6,6 +6,7 @@ import {
     AuthStateChecker,
     CustomToaster,
 } from "@/components/elements";
+import { ProfileFetcher } from "@/components/profile-fetcher";
 import { ThemeToggler } from "@/components/theme-toggler";
 import { cookies } from "next/headers";
 import "./globals.css";
@@ -27,6 +28,7 @@ export default function RootLayout({
                         <ThemeProvider>
                             <GoogleAuthProvider>
                                 <OneTapProvider>
+                                    <ProfileFetcher />
                                     {children}
                                     <ThemeToggler />
                                     <CustomToaster />
