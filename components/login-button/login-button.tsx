@@ -15,7 +15,7 @@ const LoginButton = () => {
 
   const onLoginClickHelper = useGoogleLogin({
     onSuccess: async (token) => {
-      setIsAuthenticated(true);
+      setIsAuthenticating(true);
 
       const toastId = toast.loading("Autheticating...");
 
